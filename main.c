@@ -88,15 +88,14 @@ char *decryptGiphyApiKey()
 
 {
   char *out;
-  int i;
   
   out = malloc(34);
-  i = 0;
-  do {
+
+  for(int i = 0; i < 33; i++)
     out[i] = s1[s2[i]];
-    i = i + 1;
-  } while (i != 33);
+
   out[33] = '\0';
+  free(out);
   return out;
 }
 
@@ -104,17 +103,14 @@ char* decryptSigningKey()
 
 {
   char *out;
-  int i;
   
   out = malloc(66);
-  i = 0;
-  do {
+
+  for(int i = 0; i < 65;i++)
     out[i] = map[key[i]];
-    i = i + 1;
-  } while (i != 65);
 
   out[65] = '\0';
-  
+  free(out);
   return out;
 }
 
@@ -122,13 +118,9 @@ int main() {
     char *giphy = decryptGiphyApiKey();
     char *sign = decryptSigningKey();
     
-    for(int i = 0; i < strlen(giphy); i++) 
-        printf("%c",giphy[i]);
+    printf("Giphy key: %s\n",giphy);
     
-    printf("\nNow the Request Signing key \n");
-    
-    for(int i = 0; i < strlen(sign); i++) 
-        printf("%c",sign[i]);
+    printf("\nNow the Request Signing key %s \n",sign);
     
     printf("\nReddit, i think this should be an easy reverse engineering exercise, not the protection for your beloved app\n");
 }
