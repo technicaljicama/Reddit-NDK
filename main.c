@@ -95,7 +95,6 @@ char *decryptGiphyApiKey()
     out[i] = s1[s2[i]];
 
   out[33] = '\0';
-  free(out);
   return out;
 }
 
@@ -110,7 +109,6 @@ char* decryptSigningKey()
     out[i] = map[key[i]];
 
   out[65] = '\0';
-  free(out);
   return out;
 }
 
@@ -123,4 +121,7 @@ int main() {
     printf("\nNow the Request Signing key %s \n",sign);
     
     printf("\nReddit, i think this should be an easy reverse engineering exercise, not the protection for your beloved app\n");
+    free(sign);
+    free(giphy);
+    return 0;
 }
